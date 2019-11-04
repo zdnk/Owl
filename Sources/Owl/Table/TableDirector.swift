@@ -704,6 +704,9 @@ extension TableDirector: UITableViewDataSource, UITableViewDelegate {
 
 	public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         //let adapter = adapterForCellClass(tableView.cellForRow(at: indexPath))
+        guard indexPath.section < sections.count, indexPath.row < sections[indexPath.section].elements.count else {
+        return
+        }
         let (model, adapter) = context(forItemAt: indexPath)
         let _ = adapter.dispatchEvent(.endDisplay, model: model, cell: cell, path: indexPath, params: nil)
 	}
